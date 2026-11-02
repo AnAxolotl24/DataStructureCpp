@@ -35,6 +35,21 @@ const int& LinkedList::get_at(int k) const{
     return curr->val;
 }
 
+LinkedList LinkedList::fusion(const LinkedList& other) const{
+    LinkedList res;
+    Node* curr = head;
+    while(curr != nullptr){
+        res.addlast(curr->val);
+        curr = curr->next;
+    }
+    curr = other.head;
+    while(curr != nullptr){
+        res.addlast(curr->val);
+        curr = curr->next;
+    }
+    return res;
+}
+
 LinkedList LinkedList::merge(const LinkedList& other) const{
     LinkedList res;
     Node* currThis = head;
@@ -194,7 +209,7 @@ bool LinkedList::operator!=(const LinkedList& other) const {
 }
 
 LinkedList LinkedList::operator+(const LinkedList& other) const{
-    return this->merge(other);
+    return this->fusion(other);
 }
 
 void LinkedList::addfirst(int val){

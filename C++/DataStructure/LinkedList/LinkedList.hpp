@@ -22,6 +22,7 @@ class LinkedList{
 
         int& get_at(int k);
         const int& get_at(int k) const;
+        LinkedList fusion(const LinkedList& other) const;
 
         LinkedList merge(const LinkedList& other) const;
         std::pair<LinkedList, LinkedList> split();

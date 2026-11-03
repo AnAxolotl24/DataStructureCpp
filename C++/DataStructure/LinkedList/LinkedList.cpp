@@ -10,7 +10,6 @@ Node::Node(int value){
 int& LinkedList::get_at(int k){
     if(k < 0 || k >= length){
         throw std::out_of_range("Index out range");
-        exit(1);
     }
     if(k == length - 1){
         return tail->val;
@@ -25,7 +24,6 @@ int& LinkedList::get_at(int k){
 const int& LinkedList::get_at(int k) const{
     if(k < 0 || k >= length){
         throw std::out_of_range("Index out range");
-        exit(1);
     }
     if(k == length - 1){
         return tail->val;
@@ -268,7 +266,6 @@ void LinkedList::reverse(){
 void LinkedList::remove_at(int k){
     if(k < 0 || k >= length){
         throw std::out_of_range("Index out range");
-        exit(1);
     }
     if(k == 0){
         Node* tmp = head;
@@ -295,7 +292,6 @@ void LinkedList::remove_at(int k){
 void LinkedList::insert_at(int k, int value){
     if(k < 0 || k > length){
         throw std::out_of_range("Index out range");
-        exit(1);
     }
     if(k == 0){
         addfirst(value);
@@ -315,8 +311,7 @@ void LinkedList::insert_at(int k, int value){
 
 void LinkedList::set_at(int k, int value){
     if(k < 0 || k >= length){
-        std::cout << "Index out of range" << std::endl;
-        exit(1);
+        throw std::out_of_range("Index out range");
     }
     Node* curr = head;
     while(k > 0){
@@ -390,8 +385,7 @@ int LinkedList::get_head(){
     if(length > 0){
         return head->val;
     }else{
-        std::cout << "Erreur, liste vide" << std::endl;
-        exit(1);
+        throw std::out_of_range("List is empty");
     }
 }
 
@@ -399,8 +393,7 @@ int LinkedList::get_tail(){
     if(length > 0){
         return tail->val;
     }else{
-        std::cout << "Erreur, liste vide" << std::endl;
-        exit(1);
+        throw std::out_of_range("List is empty");
     }
 }
 
@@ -424,7 +417,6 @@ void LinkedList::print(){
 int LinkedList::pop_front(){
     if(is_empty()){
         throw std::out_of_range("List is empty");
-        exit(1);
     }
     int res = head->val;
     Node* tmp = head;
@@ -437,7 +429,6 @@ int LinkedList::pop_front(){
 int LinkedList::pop_back(){
     if(is_empty()){
         throw std::out_of_range("List is empty");
-        exit(1);
     }
     int res = tail->val;
     Node* curr = head;

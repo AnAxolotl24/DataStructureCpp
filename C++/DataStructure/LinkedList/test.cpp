@@ -53,8 +53,22 @@ void test_fusion(){
     assert(((lst1 + lst2) == res) && ((lst2 + lst1) == res));
 }
 
+void test_get_at(){
+    LinkedList lst1;
+    LinkedList lst2;
+    
+    lst1.addfirst(45);
+    lst1.addfirst(90);
+    lst1.addfirst(180);
+    assert(lst1[0] == 180);
+    //assert(lst1[2] == 45);
+    lst2.addlast(0);
+    assert(lst2[0] == 0);
+}
+
 int main(void){
     test_fusion();
     test_bool_equal();
+    test_get_at();
     return 0;
 }

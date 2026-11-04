@@ -60,10 +60,27 @@ void test_get_at(){
     lst1.addfirst(45);
     lst1.addfirst(90);
     lst1.addfirst(180);
-    assert(lst1[0] == 180);
-    //assert(lst1[2] == 45);
+    assert(lst1[1] == 90);
     lst2.addlast(0);
     assert(lst2[0] == 0);
+}
+
+void test_remove_at(){
+    LinkedList lst1;
+    LinkedList lst2;
+    LinkedList res;
+    res.addfirst(180);
+    res.addlast(45);
+    
+    lst1.addfirst(45);
+    lst1.addfirst(90);
+    lst1.addfirst(180);
+    lst1.remove_at(1);
+    assert(lst1 == res);
+    lst2.addlast(0);
+    lst2.remove_at(0);
+    res.clear();
+    assert(lst2 == res);
 }
 
 void test_sort(){
@@ -94,5 +111,6 @@ int main(void){
     test_bool_equal();
     test_get_at();
     test_sort();
+    test_remove_at(){
     return 0;
 }

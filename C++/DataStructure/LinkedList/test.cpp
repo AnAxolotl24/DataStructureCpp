@@ -66,9 +66,33 @@ void test_get_at(){
     assert(lst2[0] == 0);
 }
 
+void test_sort(){
+    LinkedList lst;
+    LinkedList res;
+    lst.addfirst(10);
+    res.addfirst(10);
+    lst.sort();
+    assert(lst == res);
+    lst.addfirst(40);
+    lst.addfirst(32);
+    lst.addlast(45);
+    lst.addlast(15);
+    res.addlast(15);
+    res.addlast(32);
+    res.addlast(40);
+    res.addlast(45);
+    lst.sort();
+    assert(lst == res);
+    lst.clear();
+    res.clear();
+    lst.sort();
+    assert(lst == res);
+}
+
 int main(void){
     test_fusion();
     test_bool_equal();
     test_get_at();
+    test_sort();
     return 0;
 }

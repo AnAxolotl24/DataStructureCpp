@@ -111,6 +111,6 @@ int main(void){
     test_bool_equal();
     test_get_at();
     test_sort();
-    test_remove_at(){
+    test_remove_at();
     return 0;
 }

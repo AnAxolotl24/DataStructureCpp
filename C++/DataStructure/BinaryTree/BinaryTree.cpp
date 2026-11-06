@@ -17,12 +17,26 @@ class BinaryTree{
             delete right;
         }
 
-        int get_val(){
+        BinaryTree(const BinaryTree& other){
+            val = other.get_val();
+            if(other.left){
+                left = new BinaryTree(*other.left);
+            }else{
+                left = nullptr;
+            }
+            if(other.right){
+                right = new BinaryTree(*other.right);
+            }else{
+                right = nullptr;
+            }
+        }
+
+        int get_val() const {
             return val;
         }
 
         void add_value(int value){
-            if(value > val){
+            if(value < val){
                 if(left == nullptr){
                     left = new BinaryTree(value);
                 }else{

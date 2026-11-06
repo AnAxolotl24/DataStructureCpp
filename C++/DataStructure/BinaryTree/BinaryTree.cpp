@@ -20,20 +20,27 @@ class BinaryTree{
         int get_val(){
             return val;
         }
-        void set_right_node(int value){
-            right = new BinaryTree(value);
-        }
 
-        void set_left_node(int value){
-            left = new BinaryTree(value);
+        void add_value(int value){
+            if(value > val){
+                if(left == nullptr){
+                    left = new BinaryTree(value);
+                }else{
+                    left->add_value(value);
+                }
+            
+            }else{
+                if(right == nullptr){
+                    right = new BinaryTree(value);
+                }else{
+                    right->add_value(value);
+                }
+            }
         }
+    
 };
 
 int main(void){
-    BinaryTree* tree = new BinaryTree(10);
-    tree->set_left_node(5);
-    std::cout << tree->get_val() << std::endl;
-
-    delete tree;
+    BinaryTree tree(10);
     return 0;
 }

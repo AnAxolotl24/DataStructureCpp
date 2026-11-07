@@ -69,12 +69,26 @@ class BinaryTree{
 */
 
         void add_value(int value){
-            //Node* curr = root;
-
+            Node* curr = root;
+            Node* prec = nullptr;
+            while(curr != nullptr){
+                prec = curr;
+                if(value < curr->val){
+                    curr = curr->right;
+                }else{
+                    curr = curr->left;
+                }
+            }
+            if(value < curr->val){
+                prec->right = new Node(value);
+            }else{
+                prec->left = new Node(value);
+            }
         }
     
         void clear(){
-
+            delete root;
+            root = nullptr;
         }
 };
 

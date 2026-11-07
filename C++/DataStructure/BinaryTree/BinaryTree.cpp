@@ -38,17 +38,7 @@ class BinaryTree{
         }
 /*
         BinaryTree(const BinaryTree& other){
-            val = other.get_val();
-            if(other.left){
-                left = new BinaryTree(*other.left);
-            }else{
-                left = nullptr;
-            }
-            if(other.right){
-                right = new BinaryTree(*other.right);
-            }else{
-                right = nullptr;
-            }
+            
         }
 
         BinaryTree& operator=(BinaryTree&& other) noexcept {

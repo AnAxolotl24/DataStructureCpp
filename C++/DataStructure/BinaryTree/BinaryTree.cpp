@@ -1,22 +1,42 @@
 #include <iostream>
 
-class BinaryTree{
+class Node{
     private:
         int val;
-        BinaryTree* left;
-        BinaryTree* right;
+        Node* left;
+        Node* right;
+
+    friend class BinaryTree;
 
     public:
-        BinaryTree(int value){
+        Node(int value){
             val = value;
             left = nullptr;
             right = nullptr;
         }
-        ~BinaryTree(){
+        ~Node(){
             delete left;
             delete right;
         }
+};
 
+class BinaryTree{
+    private:
+        Node* root;
+        int height;
+        int size;
+
+    public:
+        BinaryTree(){
+            root = nullptr;
+            height = 0;
+            size = 0;
+        }
+
+        ~BinaryTree(){
+            delete root;
+        }
+/*
         BinaryTree(const BinaryTree& other){
             val = other.get_val();
             if(other.left){
@@ -31,30 +51,35 @@ class BinaryTree{
             }
         }
 
-        int get_val() const {
-            return val;
+        BinaryTree& operator=(BinaryTree&& other) noexcept {
+            if(this != &other){
+                clear();
+
+                val = other.val;
+                left = other.left;
+                right = other.right;
+
+
+                other.right = nullptr;
+                other.left = nullptr;
+
+            }
+            return *this;
         }
+*/
 
         void add_value(int value){
-            if(value < val){
-                if(left == nullptr){
-                    left = new BinaryTree(value);
-                }else{
-                    left->add_value(value);
-                }
-            
-            }else{
-                if(right == nullptr){
-                    right = new BinaryTree(value);
-                }else{
-                    right->add_value(value);
-                }
-            }
+            //Node* curr = root;
+
         }
     
+        void clear(){
+
+        }
 };
 
+
+
 int main(void){
-    BinaryTree tree(10);
     return 0;
 }

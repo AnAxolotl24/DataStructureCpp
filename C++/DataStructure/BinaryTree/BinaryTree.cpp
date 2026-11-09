@@ -27,23 +27,16 @@ class BinaryTree{
         int height;
         int size;
 
-        int calculate_height(Node* element){
-            if(element == nullptr){
-                return -1;
-            }
-            int a = calculate_height(element->left);
-            int b = calculate_height(element->right);
-            if(a > b){
-                return a + 1;
-            }else{
-                return b + 1;
+        void print_n_spaces(int n){
+            for(int i = 0; i < n; i++){
+                std::cout << "  ";
             }
         }
 
     public:
         BinaryTree(){
             root = nullptr;
-            height = 0;
+            height = -1;
             size = 0;
         }
 
@@ -91,12 +84,15 @@ class BinaryTree{
         void add_value(int value){
             Node* curr = root;
             Node* prec = nullptr;
+            int curr_height = 0;
             size = size + 1;
             if(root == nullptr){
                 root = new Node(value);
+                height = curr_height;
                 return;
             }
             while(curr != nullptr){
+                curr_height++;
                 prec = curr;
                 if(value < curr->val){
                     curr = curr->right;
@@ -109,7 +105,7 @@ class BinaryTree{
             }else{
                 prec->left = new Node(value);
             }
-            height = calculate_height(root);
+            height = curr_height;
         }
     
         void clear(){
@@ -120,16 +116,27 @@ class BinaryTree{
         }
 
         void display(){
-            std::queue<Node*> queue;
-            queue.push(root);
+            std::queue<Node*> queue1;
+            std::queue<Node*> queue2;
+            int height = 1;
+            int spaces = 16;
+            std::swap(queue1, queue2);
+            queue1.push(root);
             Node* curr = nullptr;
-            while(!(queue.empty())){
-                curr = queue.front();
-                queue.pop();
+            while(!(queue1.empty() && queue2.empty())){
+                if(queue1.empty()){
+                    std::swap(queue1, queue2);
+                    height = height*2;
+                    std::cout << std::endl;
+                }
+                curr = queue1.front();
+                queue1.pop();
                 if(curr != nullptr){
-                    queue.push(curr->left);
-                    queue.push(curr->right);
+                    queue2.push(curr->left);
+                    queue2.push(curr->right);
+                    print_n_spaces(spaces/height);
                     std::cout << curr->val << " ";
+                    print_n_spaces(spaces/height);
                 }
             }
             std::cout << std::endl;
@@ -144,7 +151,14 @@ class BinaryTree{
 
 int main(void){
     BinaryTree bin;
+    bin.add_value(25);
+    bin.add_value(35);
+    bin.add_value(30);
+    bin.add_value(50);
     bin.add_value(15);
+    bin.add_value(20);
+    bin.add_value(10);
     std::cout << bin.get_height() << std::endl;
+    bin.display();
     return 0;
 }

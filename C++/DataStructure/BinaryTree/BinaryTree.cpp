@@ -145,6 +145,33 @@ class BinaryTree{
         int get_height(){
             return height;
         }
+
+        int get_size(){
+            return size;
+        }
+
+        int get_max(){
+            if(size == 0){
+                throw std::out_of_range("Tree is empty");
+            }
+            Node* curr = root;
+            while(curr->left != nullptr){
+                curr = curr->left;
+            }
+            return curr->val;
+        }
+
+        int get_min(){
+            if(size == 0){
+                throw std::out_of_range("Tree is empty");
+            }
+            Node* curr = root;
+            while(curr->right != nullptr){
+                curr = curr->right;
+            }
+            return curr->val;
+        }
+
     };
 
 
@@ -158,7 +185,8 @@ int main(void){
     bin.add_value(15);
     bin.add_value(20);
     bin.add_value(10);
-    std::cout << bin.get_height() << std::endl;
     bin.display();
+    std::cout << bin.get_max() << std::endl;
+    std::cout << bin.get_min() << std::endl;
     return 0;
 }

@@ -108,6 +108,21 @@ class BinaryTree{
             height = curr_height;
         }
     
+        bool search(int value){
+            Node* curr = root;
+            while(curr != nullptr){
+                if(curr->val == value){
+                    return true;
+                }
+                if(value < curr->val){
+                    curr = curr->right;
+                }else{
+                    curr = curr->left;
+                }
+            }
+            return false;
+        }
+
         void clear(){
             delete root;
             root = nullptr;
@@ -142,15 +157,26 @@ class BinaryTree{
             std::cout << std::endl;
         }
 
-        int get_height(){
+        bool is_empty() const{
+            return size == 0;
+        }
+
+        int get_height() const{
             return height;
         }
 
-        int get_size(){
+        int get_size() const{
             return size;
         }
 
-        int get_max(){
+        int get_root() const{
+            if(!(is_empty())){
+                return root->val;
+            }
+            throw std::out_of_range("Tree is empty");
+        }
+
+        int get_max() const{
             if(size == 0){
                 throw std::out_of_range("Tree is empty");
             }
@@ -161,7 +187,7 @@ class BinaryTree{
             return curr->val;
         }
 
-        int get_min(){
+        int get_min() const{
             if(size == 0){
                 throw std::out_of_range("Tree is empty");
             }
@@ -170,6 +196,26 @@ class BinaryTree{
                 curr = curr->right;
             }
             return curr->val;
+        }
+
+        int count_leaves() const{
+            int res = 0;
+            std::queue<Node*> q;
+            Node* curr = nullptr;
+            q.push(root);
+            while(!(q.empty())){
+                curr = q.front();
+                q.pop();
+                if(!(curr == nullptr)){
+                    if(curr->right == nullptr && curr->left == nullptr){
+                        res++;
+                    }else{
+                        q.push(curr->right);
+                        q.push(curr->left);
+                    }
+                }
+            }
+            return res;
         }
 
     };
@@ -186,7 +232,6 @@ int main(void){
     bin.add_value(20);
     bin.add_value(10);
     bin.display();
-    std::cout << bin.get_max() << std::endl;
-    std::cout << bin.get_min() << std::endl;
+    std::cout << bin.search(35) << std::endl;
     return 0;
 }

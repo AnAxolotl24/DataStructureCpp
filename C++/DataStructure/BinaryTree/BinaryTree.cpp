@@ -218,6 +218,81 @@ class BinaryTree{
             return res;
         }
 
+        int count_internal_nodes() const{
+            return size - count_leaves();
+        }
+
+        int count_nodes_at_level(int n){
+            if(n > height){
+                return 0;
+            }
+            int stage = 0;
+            int res = 0;
+            std::queue<Node*> q1;
+            std::queue<Node*> q2;
+            Node* curr = nullptr;
+            q1.push(root);
+            while(!(q1.empty() && q2.empty())){
+                if(q1.empty()){
+                    if(stage == n){
+                        return res;
+                    }
+                    std::swap(q1, q2);
+                    stage = stage + 1;
+                }
+                curr = q1.front();
+                q1.pop();
+                if(!(curr == nullptr)){
+                    if(stage == n){
+                        res++;
+                    }
+                    q2.push(curr->left);
+                    q2.push(curr->right);
+                }
+            }
+            return res;
+        }
+    
+        bool is_full(){
+            if(is_empty()){
+                return true;
+            }
+            std::queue<Node*> q;
+            Node* curr = nullptr;
+            q.push(root);
+            while(!q.empty()){
+                curr = q.front();
+                q.pop();
+                if(curr != nullptr){
+                    q.push(curr->right);
+                    q.push(curr->left);
+                    if((curr->left == nullptr && curr->right != nullptr)){
+                        return false;
+                    }else if(curr->left != nullptr && curr->right == nullptr){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    
+        int get_level(int value){
+            int stage = 0;
+            Node* curr = root;
+            while(curr != nullptr){
+                if(value == curr->val){
+                    return stage;
+                }
+                if(value < curr->val){
+                    curr = curr->right;
+                    stage++;
+                }else{
+                    curr = curr->left;
+                    stage++;
+                }
+            }
+            return -1;
+        }
     };
 
 
@@ -232,6 +307,6 @@ int main(void){
     bin.add_value(20);
     bin.add_value(10);
     bin.display();
-    std::cout << bin.search(35) << std::endl;
+    std::cout << bin.get_level(10) << std::endl;
     return 0;
 }

@@ -101,6 +101,28 @@ void test_insert_at(){
     assert(lst2 == res);
 }
 
+void test_remove(){
+    LinkedList lst1;
+    LinkedList lst2;
+    LinkedList res;
+    res.addfirst(180);
+    res.addlast(45);
+    lst1.addfirst(180);
+    lst1.addfirst(45);
+    lst1.addfirst(90);
+    lst1.remove(90);
+    assert(lst1 == res);
+    lst2.addfirst(10);
+    lst2.addfirst(20);
+    lst2.addlast(14);
+    lst2.remove(25);
+    res.clear();
+    res.addfirst(10);
+    res.addfirst(20);
+    res.addlast(14);
+    assert(lst2 == res);
+}
+
 void test_sort(){
     LinkedList lst;
     LinkedList res;

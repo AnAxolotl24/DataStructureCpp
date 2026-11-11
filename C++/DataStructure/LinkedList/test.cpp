@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 #include "LinkedList.hpp"
 
 void test_bool_equal(){
@@ -83,6 +84,23 @@ void test_remove_at(){
     assert(lst2 == res);
 }
 
+void test_insert_at(){
+    LinkedList lst1;
+    LinkedList lst2;
+    LinkedList res;
+    res.addfirst(180);
+    res.addlast(45);
+    res.addfirst(90);
+    lst1.addfirst(45);
+    lst1.addfirst(90);
+    lst1.insert_at(1, 180);
+    assert(lst1 == res);
+    lst2.insert_at(0, 10);
+    res.clear();
+    res.addfirst(10);
+    assert(lst2 == res);
+}
+
 void test_sort(){
     LinkedList lst;
     LinkedList res;
@@ -109,8 +127,9 @@ void test_sort(){
 int main(void){
     test_fusion();
     test_bool_equal();
-    test_get_at();
-    test_sort();
+    test_get_at();    
     test_remove_at();
+    test_insert_at();
+    test_sort();
     return 0;
 }

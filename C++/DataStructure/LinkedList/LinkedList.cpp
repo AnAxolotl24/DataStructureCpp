@@ -271,6 +271,7 @@ void LinkedList::remove_at(int k){
         Node* tmp = head;
         head = head->next;
         delete tmp;
+        length--;
         return;
     }
 
@@ -307,6 +308,7 @@ void LinkedList::insert_at(int k, int value){
     Node* nouv = new Node(value);
     curr->next = nouv;
     nouv->next = tmp;
+    length++;
 }
 
 void LinkedList::set_at(int k, int value){

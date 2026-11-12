@@ -22,36 +22,24 @@ void test_bool_equal(){
     assert(lst2 == lst1);
 }
 
-void test_fusion(){
-    LinkedList lst1;
-    LinkedList lst2;
-    LinkedList res;
-
-    lst1.addfirst(5);
-    lst1.addfirst(4);
-    lst1.addfirst(3);
-    lst2.addfirst(6);
-    res.addfirst(6);
-    res.addlast(3);
-    res.addlast(4);
-    res.addlast(5);
-    assert((lst2 + lst1) == res);
-
-    res.clear();
-
-    res.addfirst(5);
-    res.addfirst(4);
-    res.addfirst(3);
-    res.addlast(6);
-    assert((lst1 + lst2) == res);
-
-    lst1.clear();
-    lst2.clear();
-    res.clear();
-
-    lst1.addfirst(1);
-    res.addfirst(1);
-    assert(((lst1 + lst2) == res) && ((lst2 + lst1) == res));
+void test_get_size(){
+    LinkedList lst;
+    lst.addlast(100);
+    lst.addfirst(50);
+    lst.addfirst(25);
+    assert(lst.get_size() == 3);
+    lst.insert_at(2, 15);
+    lst.insert_at(2, 10);
+    assert(lst.get_size() == 5);
+    lst.remove_at(2);
+    lst.remove_at(0);
+    lst.remove_at(1);
+    assert(lst.get_size() == 2);
+    lst.remove_at(0);
+    lst.remove_at(0);
+    assert(lst.get_size() == 0);
+    lst.clear();
+    assert(lst.get_size() == 0);
 }
 
 void test_get_at(){
@@ -123,6 +111,55 @@ void test_remove(){
     assert(lst2 == res);
 }
 
+void test_count(){
+    LinkedList lst;
+    lst.addfirst(25);
+    lst.addfirst(20);
+    lst.addlast(10);
+    lst.addfirst(35);
+    lst.addfirst(5);
+    lst.addlast(10);
+    lst.addfirst(35);
+    lst.addlast(35);
+    assert(lst.count(10) == 2);
+    assert(lst.count(35) == 3);
+    lst.clear();
+    assert(lst.count(20) == 0);
+    assert(lst.count(1) == 0);
+}
+
+void test_fusion(){
+    LinkedList lst1;
+    LinkedList lst2;
+    LinkedList res;
+
+    lst1.addfirst(5);
+    lst1.addfirst(4);
+    lst1.addfirst(3);
+    lst2.addfirst(6);
+    res.addfirst(6);
+    res.addlast(3);
+    res.addlast(4);
+    res.addlast(5);
+    assert((lst2 + lst1) == res);
+
+    res.clear();
+
+    res.addfirst(5);
+    res.addfirst(4);
+    res.addfirst(3);
+    res.addlast(6);
+    assert((lst1 + lst2) == res);
+
+    lst1.clear();
+    lst2.clear();
+    res.clear();
+
+    lst1.addfirst(1);
+    res.addfirst(1);
+    assert(((lst1 + lst2) == res) && ((lst2 + lst1) == res));
+}
+
 void test_sort(){
     LinkedList lst;
     LinkedList res;
@@ -147,11 +184,14 @@ void test_sort(){
 }
 
 int main(void){
-    test_fusion();
     test_bool_equal();
+    test_get_size();
     test_get_at();    
     test_remove_at();
     test_insert_at();
+    test_count();
+    test_fusion();
     test_sort();
+    std::cout << "Tous les tests ont reussis" << std::endl;
     return 0;
 }

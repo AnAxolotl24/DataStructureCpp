@@ -89,6 +89,46 @@ void set_at(DArray* darr, size_t k, int val){
     }
 }
 
+int get_at(DArray* darr, size_t k){
+    if(k >= darr->size){
+        printf("Error : index out of range\n");
+        return -1;
+    }
+    return darr->arr[k];
+}
+
+void insert_at(DArray* darr, size_t k, int val){
+    if(k > darr->size){
+        printf("Error : index out of range");
+        return;
+    }else if(k == darr->size){
+        addlast_arr(darr, val);
+        return;
+    }
+    if(darr->size == darr->capacity){
+        resize_array(darr);
+    }
+    int tmp = val;
+    int tmp2 = 0;
+    darr->size++;
+    for(size_t i = k; i < darr->size; ++i){
+        tmp2 = get_at(darr, i);
+        set_at(darr, i, tmp);
+        tmp = tmp2;
+    }
+}
+
+void remove_at_arr(DArray* darr, size_t k){
+    if(k > darr->size){
+        printf("Error : index k=%d is out of array\n", k);
+        return;
+    }
+    for(size_t i = k; i < darr->size-1; ++i){
+        darr->arr[i] = darr->arr[i+1];
+    }
+    darr->size--;
+}
+
 size_t get_arr_capacity(DArray* darr){
     return darr->capacity;
 }
@@ -140,15 +180,9 @@ void shrink_to_fit_arr(DArray* darr){
     darr->arr = tmp;
 }
 
-void remove_at_arr(DArray* darr, size_t k){
-    if(k > darr->size){
-        printf("Error : index k=%d is out of array\n", k);
-        return;
-    }
-    for(size_t i = k; i < darr->size-1; ++i){
-        darr->arr[i] = darr->arr[i+1];
-    }
-    darr->size--;
+void free_arr(DArray* darr){
+    free(darr->arr);
+    free(darr);
 }
 
 void print_arr(DArray* darr){
@@ -164,20 +198,14 @@ void print_arr(DArray* darr){
     printf("}\n");
 }
 
-void free_arr(DArray* darr){
-    free(darr->arr);
-    free(darr);
-}
-
 int main(void){
     DArray* test = initialize_array();
     addlast_arr(test, 1);
     addlast_arr(test, 2);
     addlast_arr(test, 3);
-    set_at(test, 2, 100);
     addlast_arr(test, 4);
     addlast_arr(test, 5);
-    remove_at_arr(test, 4);
+    insert_at(test, 2, 10);
     print_arr(test);
     free_arr(test);
     return 0;
